@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://itchanged/skin/itchanged.css" type="text/css"?>
+<window id="itchanged-debug"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript;version=1.7" src="chrome://itchanged/content/itchanged-debug.js"/>
+</window>

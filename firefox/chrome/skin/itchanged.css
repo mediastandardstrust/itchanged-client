@@ -1,0 +1,19 @@
+listitem[updated="1"] {
+  font-weight: bold;
+}
+#itchanged-toolbar-button
+{
+  list-style-image: url("chrome://itchanged/skin/toolbar-button-large.png");
+  opacity: 0.5;
+}
+
+#itchanged-toolbar-button[unread]
+{
+  opacity: 1.0;
+}
+
+toolbar[iconsize="small"] #itchanged-toolbar-button
+{
+  list-style-image: url("chrome://itchanged/skin/toolbar-button-small.png");
+  opacity: 0.5;
+}

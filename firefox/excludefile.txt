@@ -1,0 +1,4 @@
+.DS_Store
+*.kpf
+buildit.sh
+excludefile.txt

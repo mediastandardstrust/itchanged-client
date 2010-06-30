@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="urn:mozilla:install-manifest"
+                   em:id="itchanged@itchanged.org"
+                   em:name="itChanged"
+                   em:version="0.9"
+                   em:creator="itchanged.org"
+                   em:iconURL="chrome://itchanged/skin/icon.png"
+                   em:description="Track changes in news articles">
+    <em:targetApplication>
+      <RDF:Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+        <em:minVersion>3.5</em:minVersion>
+        <em:maxVersion>3.6.*</em:maxVersion>
+      </RDF:Description>
+    </em:targetApplication>
+  </RDF:Description>
+</RDF:RDF>

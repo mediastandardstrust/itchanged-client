@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://itchanged/skin/itchanged.css" type="text/css"?>
+<page id="itchangedPanel"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	  onload="load();">
+  <script type="application/x-javascript;version=1.7" src="chrome://itchanged/content/itchangedPanel.js"/>
+  <popup id="itchanged-popup">
+    <menuitem label="Delete" oncommand="deleteArticle();"/>
+    <menuitem label="History" oncommand="summarizeArticle();"/>
+	<menuseparator id="deleteall-separator"/>
+    <menuitem id="deleteall" label="Delete all" oncommand="deleteAll();"/>
+  </popup>
+<vbox flex="1">
+  <hbox align="center">
+    <label value="Search:" control="search-box"/>
+    <textbox id="search-box" flex="1" type="search" class="compact"
+             oncommand="searchKeyword(this.value);"/>
+  </hbox>
+<listbox flex="1" onclick="rowSelected(event)" id="itchanged-listbox" datasources="profile:itchanged.sqlite" ref="*" querytype="storage">
+  <template>
+	  <query>
+			SELECT *
+			FROM articles
+			WHERE (title LIKE :like)
+			ORDER by updated DESC
+		<param name="like" id="like" type="string">%</param>
+	  </query>
+	  <action>
+      <listitem uri="?" label="?title" tooltiptext="?title" value="?id" url="?url" updated="?updated"  contextmenu="itchanged-popup"/>
+	  </action>
+	</template>
+  </listbox>
+  </vbox>
+</page>

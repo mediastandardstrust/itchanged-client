@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://itchanged/skin/itchanged.css" type="text/css"?>
+<overlay
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript;version=1.7" src="chrome://itchanged/content/itchanged.js"/>
+  <toolbarpalette id="BrowserToolbarPalette">
+  <toolbarbutton id="itchanged-toolbar-button" class="toolbarbutton-1 chromeclass-toolbar-additional"
+                 oncommand="toggleSidebar('itchanged-sidebar');"
+                 label="itchanged"/>
+  </toolbarpalette>
+  <menupopup id="viewSidebarMenu">
+    <menuitem id="itchanged-sidebar" label="itChanged Sidebar" observes="itchanged-sidebar"/>
+  </menupopup>
+  <broadcasterset id="mainBroadcasterSet">
+    <broadcaster id="itchanged-sidebar"
+                 autoCheck="false"
+                 type="checkbox"
+                 group="sidebar"
+                 sidebarurl="chrome://itchanged/content/itchangedPanel.xul"
+                 sidebartitle="itChanged"
+                 oncommand="toggleSidebar('itchanged-sidebar');"/>
+  </broadcasterset>
+</overlay>

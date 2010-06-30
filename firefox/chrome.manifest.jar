@@ -1,0 +1,6 @@
+overlay	chrome://browser/content/browser.xul	chrome://itchanged/content/itchanged.xul
+content	itchanged jar:chrome/itchanged.jar!/content/
+locale  itchanged en-US jar:chrome/itchanged.jar!/locale/en-US/
+skin    itchanged classic/1.0 jar:chrome/itchanged.jar!/skin/
+resource itchanged  modules/
+style chrome://global/content/customizeToolbar.xul chrome://itchanged/skin/itchanged.css
