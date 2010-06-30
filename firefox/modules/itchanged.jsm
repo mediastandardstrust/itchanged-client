@@ -28,6 +28,7 @@ function notifyObservers() {
 var timerCallback  = {      
   notify: function notify(timer) {
 	var xhr = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
+	xhr.mozBackgroundRequest = true;
 
     var server = prefBranch.getCharPref("server");
 	
@@ -105,6 +106,7 @@ var itchanged = {
 	  this.initializeDB();
 	}
 	var xhr = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
+	xhr.mozBackgroundRequest = true;
 
     var server = prefBranch.getCharPref("server");
 	
@@ -124,6 +126,7 @@ var itchanged = {
 	  this.initializeDB();
 	}
 	var xhr = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
+	xhr.mozBackgroundRequest = true;
 
     var server = prefBranch.getCharPref("server");
 	
@@ -152,6 +155,7 @@ var itchanged = {
 
   sendArticleToServer: function(uploadArray) {
 	var xhr = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Components.interfaces.nsIXMLHttpRequest);
+	xhr.mozBackgroundRequest = true;
 
     var server = prefBranch.getCharPref("server");
 
@@ -282,6 +286,7 @@ var itchanged = {
 	}
   
 	var xhr = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
+	xhr.mozBackgroundRequest = true;
 
     var server = prefBranch.getCharPref("server");
 
