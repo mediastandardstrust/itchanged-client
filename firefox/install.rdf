@@ -5,7 +5,7 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="itchanged@itchanged.org"
                    em:name="itChanged"
-                   em:version="0.9"
+                   em:version="0.9.1"
                    em:creator="itchanged.org"
                    em:iconURL="chrome://itchanged/skin/icon.png"
                    em:description="Track changes in news articles">

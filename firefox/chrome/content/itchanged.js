@@ -39,6 +39,8 @@ const observerService = Components.classes["@mozilla.org/observer-service;1"]
   function onPageShow(event) {
 	var news = IC.Microformats.get("hNews", event.target);
 	var entries = IC.Microformats.get("hAtom-hEntry", event.target);
+
+
 	var articleArray = [];
 	if (news.length > 0) {
 	  for (var i=0; i < news.length; i++) {

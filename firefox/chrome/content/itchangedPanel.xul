@@ -17,19 +17,32 @@
     <textbox id="search-box" flex="1" type="search" class="compact"
              oncommand="searchKeyword(this.value);"/>
   </hbox>
-<listbox flex="1" onclick="rowSelected(event)" id="itchanged-listbox" datasources="profile:itchanged.sqlite" ref="*" querytype="storage">
+
+<richlistbox flex="1" onclick="rowSelected(event)" id="itchanged-listbox" datasources="profile:itchanged.sqlite" ref="*" querytype="storage">
   <template>
 	  <query>
-			SELECT *
+			SELECT id,url,title,publication,updated,pubdate
 			FROM articles
 			WHERE (title LIKE :like)
-			ORDER by updated DESC
+			ORDER by pubdate DESC
 		<param name="like" id="like" type="string">%</param>
 	  </query>
 	  <action>
-      <listitem uri="?" label="?title" tooltiptext="?title" value="?id" url="?url" updated="?updated"  contextmenu="itchanged-popup"/>
+    
+      <richlistitem uri="?" kind="hnews" tooltiptext="?title" value="?id" url="?url" updated="?updated" contextmenu="itchanged-popup">
+        <vbox>
+          <hbox>
+            <label class="headline" value="?title" />
+          </hbox>
+          <hbox class="details">
+            <label value="?pubdate" />
+            <label value="?publication" />
+          </hbox>
+        </vbox>
+      </richlistitem>
 	  </action>
 	</template>
-  </listbox>
+
+  </richlistbox>
   </vbox>
 </page>

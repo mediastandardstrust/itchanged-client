@@ -89,15 +89,45 @@ var itchanged = {
 
 	  dbConnection = storageService.openDatabase(this.database);
 
-      if (!dbConnection.tableExists("articles")) {
+      /* version number for schema changes */
+      schemaVersion = 0;
+      if (!dbConnection.tableExists("schema")) {
+		dbConnection.executeSimpleSQL( 'CREATE TABLE schema(version)' );
+        if( dbConnection.tableExists("articles") ) {
+          ++schemaVersion;  /* first version of schema had no version */
+        }
+	    dbConnection.executeSimpleSQL( 'INSERT INTO schema(version) VALUES (' + schemaVersion + ')' );
+      } else {
+        /* check current version */
+        stmt = dbConnection.createStatement( 'SELECT version FROM schema LIMIT 1' );
+        stmt.executeStep();
+        schemaVersion = parseInt( stmt.row.version );
+      }
+
+      if( schemaVersion==0 ) {
+        /* blank slate */
 		dbConnection.executeSimpleSQL('CREATE TABLE articles ("id" INTEGER PRIMARY KEY NOT NULL' +
 								', "title" TEXT NOT NULL' +
 								', "url" TEXT' +
 								', "client_hash" TEXT' +
 								', "server_hash" TEXT' +
 								', "updated" BOOLEAN DEFAULT 0' +
+                                ', "pubdate" TEXT' +
+                                ', "publication" TEXT' +
+                                ', "kind" TEXT' +
 								' )');
+        schemaVersion = 2;
+	    dbConnection.executeSimpleSQL( 'UPDATE schema SET version=' + schemaVersion );
 	  }
+
+      if( schemaVersion==1 ) {
+        dbConnection.executeSimpleSQL( 'ALTER TABLE articles ADD COLUMN "pubdate" TEXT' );
+        dbConnection.executeSimpleSQL( 'ALTER TABLE articles ADD COLUMN "publication" TEXT' );
+        dbConnection.executeSimpleSQL( 'ALTER TABLE articles ADD COLUMN "kind" TEXT' );
+        schemaVersion = 2;
+	    dbConnection.executeSimpleSQL( 'UPDATE schema SET version=' + schemaVersion );
+      }
+
 	}
   },
 
@@ -235,15 +265,34 @@ var itchanged = {
 		var sql = "INSERT INTO articles (title";
 		sql += ", url"
 		sql += ", client_hash"
+		sql += ", pubdate"
+		sql += ", publication"
+		sql += ", kind"
 		sql += ") VALUES (:title";
 		sql += ", :url"
 		sql += ", :hash"
+		sql += ", :pubdate"
+		sql += ", :publication"
+		sql += ", :kind"
 		sql += ")";
 	
 		var statement = dbConnection.createStatement(sql);
 		statement.params['title'] = newsArray[i].hnews["entry-title"];
 		statement.params['url'] = newsArray[i].url;
 		statement.params['hash'] = hash;
+		if( newsArray[i].hnews.published ) {
+    	  dt = new Date( newsArray[i].hnews.published );
+        } else {
+    	  dt = new Date( newsArray[i].hnews.updated );
+        }
+    	statement.params['pubdate'] = dt.toLocaleDateString();
+
+		if( newsArray[i].hnews['source-org'] ) {
+            statement.params['publication'] = newsArray[i].hnews['source-org'].fn;
+        } else {
+            statement.params['publication'] = '';
+        }
+		statement.params['kind'] = 'hatom';
 		statement.executeAsync(dbListener);
 	  }
 	  uploadArray.push(uploadItem);

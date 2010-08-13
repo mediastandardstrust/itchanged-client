@@ -2098,8 +2098,15 @@ var hNews_definition = {
     "entry-content" : {
       plural: true
     },
-    "updated" : {
+    "published" : {
       datatype: "dateTime"
+    },
+    "updated" : {
+      virtual: true,
+      datatype: "dateTime",
+      virtualGetter: function(mfnode) {
+        return Microformats.parser.getMicroformatProperty(mfnode, "hAtom-hEntry", "published");
+      }
     },
     "license" : {
       datatype: "microformat",
